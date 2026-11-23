@@ -1,0 +1,55 @@
+{
+  "name": "dafny-ipm-vscode",
+  "displayName": "Dafny IPM",
+  "description": "Hover over a line of a Dafny {:ipm} proof to see the proof state at that point",
+  "version": "0.0.1",
+  "publisher": "dafny-ipm",
+  "license": "MIT",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Programming Languages"],
+  "activationEvents": ["onLanguage:dafny"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [{ "id": "dafny", "extensions": [".dfy"] }],
+    "configuration": {
+      "title": "Dafny IPM",
+      "properties": {
+        "dafnyIpm.dockerCommand": {
+          "type": "string",
+          "default": "docker",
+          "description": "Path to the docker executable."
+        },
+        "dafnyIpm.container": {
+          "type": "string",
+          "default": "ipm-work",
+          "description": "Name of the running Docker container that holds the IPM prototype."
+        },
+        "dafnyIpm.prototypeDir": {
+          "type": "string",
+          "default": "/app/workdir",
+          "description": "Folder inside the container that contains dafny-incipm.py."
+        },
+        "dafnyIpm.containerMountPath": {
+          "type": "string",
+          "default": "/work",
+          "description": "Where the workspace folder is mounted inside the container (docker run -v <workspace>:<this path>)."
+        },
+        "dafnyIpm.stepTimeoutSeconds": {
+          "type": "number",
+          "default": 120,
+          "description": "How long to wait for the prototype to answer one tactic."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "npm run compile && node out/test/proofScript.test.js && node out/test/parser.test.js && node out/test/runner.test.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "~1.85.0",
+    "typescript": "^5.0.0"
+  }
+}

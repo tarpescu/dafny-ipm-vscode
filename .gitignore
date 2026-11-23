@@ -1,0 +1,16 @@
+node_modules/
+out/
+*.vsix
+.ipm/
+*.bpl
+*.smt2
+.DS_Store
+
+# Dafny build output (F5 on a .dfy runs the program)
+examples/obj/
+examples/*.cs
+examples/*.csproj
+examples/*.deps.json
+examples/*.dll
+examples/*.pdb
+examples/*.runtimeconfig.json
